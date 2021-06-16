@@ -1,38 +1,83 @@
-import java.awt.Dimension;
-
 import javax.swing.JFrame;
-import javax.swing.JPanel;
 
-public class PaintFrame extends MyFrame {
+public class PaintFrame extends MyFrame implements MyActionListener {
+
+	public MyMenuBar menuBar;
+
+	private MyMenu fileMenu;
+	private MyMenu editMenu;
+	private MyMenu helpMenu;
+
+	private MyMenuItem loadItem;
+	private MyMenuItem saveItem;
+	private MyMenuItem exitItem;
+	MyButton rectBtn;
+	MyButton ovalBtn;
+	MyButton lineBtn;
 
 	public PaintFrame() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setSize(900, 900);
-		
-		PaintPanel panel = new PaintPanel();
-		setContentPane(panel);
-		
-		for(int i = 0; i < 12; i++) {
-			MyButton b = new MyButton("Bt" + i);
-			b.setBounds(0 + (60 * i), 0 + (60 * i), 50, 50);
-			panel.add(b);
-		}
-//		panel.setLayout(null);
-	//	panel.setLayout(new MyFlowLayout());
-		panel.setLayout(new MyGridLayout(3, 4));
-		/*
-		 * 버튼으로 바뀌게
-		 * super.setLayout(null);
-		 * MyButton button1 = new MyButton("그리드");
-		 * MyButton button2 = new MyButton("플로우");
-		 * button1.setBound(100,100,100,100);
-		 * button2.setBound(200,100,100,100);
-		 * super.setLayout(new FlowLayout());
-		 * super.setLayout(new GridLayout(3,4));
-		 * super.add(button1);
-		 * super.add(button2);
-		 * 	toolBar.add(releaseGroupBtn);
-		 * 	add(toolBar, BorderLayout.WEST);
-		 */
+
+		menuBar = new MyMenuBar();
+		setMyMenuBar(menuBar);
+
+		fileMenu = new MyMenu("File");
+		editMenu = new MyMenu("Edit");
+		helpMenu = new MyMenu("Help");
+
+		loadItem = new MyMenuItem("Load");
+		saveItem = new MyMenuItem("Save");
+		exitItem = new MyMenuItem("Exit");
+
+		loadItem.addListener(this);
+		saveItem.addListener(this);
+		exitItem.addListener(this);
+
+		fileMenu.add(loadItem);
+		fileMenu.add(saveItem);
+		fileMenu.add(exitItem);
+
+		menuBar.add(fileMenu);
+		menuBar.add(editMenu);
+		menuBar.add(helpMenu);
+
+		MyToolBar toolBar = new MyToolBar();
+		toolBar.setBounds(10, 100, 130, 500);
+		add(toolBar);
+
+		rectBtn = new MyButton("사각형");
+		rectBtn.setBounds(100, 100, 50, 50);
+		rectBtn.addListener(this);
+		toolBar.add(rectBtn);
+
+		ovalBtn = new MyButton("타원");
+		ovalBtn.setBounds(100, 100, 50, 50);
+		ovalBtn.addListener(this);
+		toolBar.add(ovalBtn);
+
+		lineBtn = new MyButton("선분");
+		lineBtn.setBounds(100, 100, 50, 50);
+		lineBtn.addListener(this);
+		toolBar.add(lineBtn);
 	}
+
+	@Override
+	public void actionPerformed(MyEvent e) {
+		if (loadItem == e.getSource()) {
+			System.out.println("LOAD FILE");
+		} else if (saveItem == e.getSource()) {
+			System.out.println("SAVE FILE");
+		} else if (exitItem == e.getSource()) {
+			System.exit(0);
+		} else if (rectBtn == e.getSource()) {
+			System.out.println("Click Rect Btn");
+		} else if (ovalBtn == e.getSource()) {
+			System.out.println("Click Oval Btn");
+		} else if (lineBtn == e.getSource()) {
+			System.out.println("Click Line Btn");
+		}
+
+	}
+
 }

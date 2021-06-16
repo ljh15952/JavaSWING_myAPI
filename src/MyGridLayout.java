@@ -1,4 +1,6 @@
 import java.awt.Dimension;
+import java.awt.Point;
+import java.util.ArrayList;
 
 public class MyGridLayout implements MyLayout {
 
@@ -20,6 +22,12 @@ public class MyGridLayout implements MyLayout {
 				index++;
 			}
 		}
+	}
+
+	@Override
+	public void sortPosition(ArrayList<MyComponent> arr, Point p, Dimension dimension, int dis) {
+		// TODO Auto-generated method stub
+
 	}
 
 }

@@ -15,6 +15,10 @@ public class MyPanel extends JPanel implements MouseListener {
 		container = new MyContainer();
 	}
 
+	public MyContainer getContainer() {
+		return container;
+	}
+
 	public void add(MyComponent c) {
 		container.add(c);
 	}
@@ -39,7 +43,7 @@ public class MyPanel extends JPanel implements MouseListener {
 	public void mouseClicked(MouseEvent e) {
 		for (MyComponent it : container.getList()) {
 			if (it.contains(e.getPoint())) {
-				System.out.println(it.label);
+				it.ClickEvent();
 			}
 		}
 	}
