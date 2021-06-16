@@ -1,3 +1,5 @@
+import java.awt.Dimension;
+
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
@@ -16,7 +18,8 @@ public class PaintFrame extends MyFrame {
 			panel.add(b);
 		}
 //		panel.setLayout(null);
-		panel.setLayout(new MyFlowLayout());
+	//	panel.setLayout(new MyFlowLayout());
+		panel.setLayout(new MyGridLayout(3, 4));
 		/*
 		 * 버튼으로 바뀌게
 		 * super.setLayout(null);
